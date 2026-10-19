@@ -1,7 +1,7 @@
 /*
  * DSH 外壳样式：omp 的 styles.css 负责卡片、图表和页面内部，
  * 这里只补面板容器、顶部导航和抽屉层级。
- * 颜色全部来自 omp 的 --* 变量（由 shadow root 上的 data-theme 选择）。
+ * 颜色全部来自 omp 的 --* 变量（由 shadow host 上的 data-theme 选择）。
  */
 
 .omp-root {
@@ -163,10 +163,21 @@
 	background: var(--bad);
 }
 
-/* Drawer/Modal 通过 portal 渲染到 .omp-portal，层级要压过宿主页面。 */
-.omp-portal .drawer,
-.omp-portal .modal-overlay {
+/* Drawer/Modal 通过 portal 渲染到 .omp-portal。容器贴合面板边界，抽屉和遮罩
+ * 相对面板定位，否则 `position: fixed` 会把遮罩铺满整个宿主窗口。 */
+:host {
+	position: relative;
+}
+
+.omp-portal {
+	position: absolute;
+	inset: 0;
 	z-index: 1000;
+	pointer-events: none;
+}
+
+.omp-portal > * {
+	pointer-events: auto;
 }
 
 @media (max-width: 980px) {

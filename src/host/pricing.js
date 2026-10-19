@@ -130,4 +130,3 @@ export function createPricing(overrides = {}) {
 	};
 }
 
-export const pricingSource = catalog.source;

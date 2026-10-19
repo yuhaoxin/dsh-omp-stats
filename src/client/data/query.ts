@@ -44,15 +44,6 @@ export interface QueryResult<T> {
 	refetch: () => void;
 }
 
-/** Warm the cache for a key the user is likely to open next. No-op if cached for this version. */
-export function prefetchQuery<T>(key: readonly unknown[], fetcher: () => Promise<T>, version: number): void {
-	const keyString = JSON.stringify(key);
-	const entry = cachedEntry(keyString);
-	if (entry && entry.version >= version) return;
-	// Never released: a prefetch runs to completion.
-	loadQuery(keyString, currentLiveVersion(), fetcher).promise.catch(() => {});
-}
-
 export function useQuery<T>(key: readonly unknown[], fetcher: QueryFetcher<T>, options?: QueryOptions): QueryResult<T> {
 	const keyString = JSON.stringify(key);
 	const enabled = options?.enabled ?? true;

@@ -5,7 +5,6 @@ import type {
 	FolderStats,
 	MessageStats,
 	ModelPerformancePoint,
-	ToolUsageStats,
 } from "../types";
 import { modelKey } from "./colors";
 import { isUnpricedMessage } from "./formatters";
@@ -284,39 +283,6 @@ export function buildFolderRows(folders: readonly FolderStats[]): FolderTableVie
 		maxCost,
 		temporaryCount,
 	};
-}
-
-/** Table row for the Tools route: usage stats plus derived rates/shares. */
-export interface ToolRowView extends ToolUsageStats {
-	/** errors / calls (0 for zero calls). */
-	errorRate: number;
-	/** This tool's fraction (0..1) of all calls in range. */
-	callFraction: number;
-	/** This tool's fraction (0..1) of all attributed tokens in range. */
-	tokenFraction: number;
-	/** This tool's fraction (0..1) of all attributed cost in range. */
-	costFraction: number;
-	/** Mean result characters fed back into context per call. */
-	avgResultChars: number;
-}
-
-export function buildToolRows(tools: ToolUsageStats[]): ToolRowView[] {
-	let calls = 0;
-	let tokens = 0;
-	let cost = 0;
-	for (const t of tools) {
-		calls += t.calls;
-		tokens += t.totalTokensShare;
-		cost += t.costShare;
-	}
-	return tools.map(t => ({
-		...t,
-		errorRate: t.calls > 0 ? t.errors / t.calls : 0,
-		callFraction: calls > 0 ? t.calls / calls : 0,
-		tokenFraction: tokens > 0 ? t.totalTokensShare / tokens : 0,
-		costFraction: cost > 0 ? t.costShare / cost : 0,
-		avgResultChars: t.calls > 0 ? t.resultChars / t.calls : 0,
-	}));
 }
 
 export type RequestStatus = "ok" | "aborted" | "failed";

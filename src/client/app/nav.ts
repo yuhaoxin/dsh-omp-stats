@@ -47,5 +47,3 @@ export const NAV: readonly NavGroup[] = [
 ];
 
 export const NAV_ITEMS: readonly NavItem[] = NAV.flatMap(group => group.items);
-
-export const SECTIONS: readonly DashboardSection[] = NAV_ITEMS.map(item => item.id);

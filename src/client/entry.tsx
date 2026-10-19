@@ -47,8 +47,10 @@ function Panel() {
 		shadow.append(portal);
 		setPortalRoot(portal);
 
+		// 主题挂在 shadow host 上，`:host([data-theme])` 才能给应用内容和 portal
+		// 出去的抽屉、弹窗同一套变量。
 		const applyTheme = () => {
-			mount.dataset.theme = currentTheme();
+			host.dataset.theme = currentTheme();
 		};
 		applyTheme();
 		const observer = new MutationObserver(applyTheme);

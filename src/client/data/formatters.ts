@@ -70,14 +70,6 @@ export function formatDurationMs(value: number | null, digits?: number): string 
 	return `${sec.toFixed(d)}s`;
 }
 
-/** Wall-clock length: seconds below a minute, then `17m 41s` / `2h 05m`. */
-export function formatElapsed(ms: number): string {
-	if (ms < 60_000) return formatDurationMs(ms);
-	const totalMin = Math.floor(ms / 60_000);
-	if (totalMin < 60) return `${totalMin}m ${String(Math.floor((ms % 60_000) / 1000)).padStart(2, "0")}s`;
-	return `${Math.floor(totalMin / 60)}h ${String(totalMin % 60).padStart(2, "0")}m`;
-}
-
 export function formatTokensPerSecond(value: number | null): string {
 	if (value === null) return "-";
 	return value.toFixed(1);
@@ -95,11 +87,4 @@ export function formatTimestamp(timestamp: number): string {
 /** Project folder as stored by ingest (`/work-pi/`), without the slashes. */
 export function formatFolder(folder: string): string {
 	return folder.replace(/^\/+|\/+$/g, "") || "(root)";
-}
-
-export function formatBytes(value: number): string {
-	if (value >= 1e9) return `${(value / 1e9).toFixed(1)} GB`;
-	if (value >= 1e6) return `${(value / 1e6).toFixed(1)} MB`;
-	if (value >= 1e3) return `${(value / 1e3).toFixed(1)} KB`;
-	return `${value} B`;
 }

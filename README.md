@@ -53,6 +53,20 @@ DSH 进程。
 node scripts/verify-fold.mjs
 ```
 
+检查面板的覆盖层在 shadow root 里能拿到主题变量并贴合面板边界（需要本机有
+Chrome，或用 `CHROME` 指定可执行文件）：
+
+```bash
+node scripts/verify-panel.mjs
+```
+
+检查客户端没有引用未定义或未导入的名字（Bun 打包不做这项检查，这类错误只在
+面板渲染时抛 `ReferenceError`，整页变空白）：
+
+```bash
+node scripts/verify-types.mjs
+```
+
 ## 数据口径
 
 | 指标 | 算法 |

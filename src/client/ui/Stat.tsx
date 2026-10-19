@@ -82,12 +82,6 @@ export function Delta({ change, good = "up" }: StatDelta) {
 	);
 }
 
-/** Relative change from `previous` to `current`; `null` when there is no baseline. */
-export function relativeChange(current: number, previous: number): number | null {
-	if (previous === 0) return current === 0 ? 0 : null;
-	return (current - previous) / previous;
-}
-
 function useChangeFlash(value: string | number | null): boolean {
 	const previous = useRef(value);
 	const [flash, setFlash] = useState(false);
