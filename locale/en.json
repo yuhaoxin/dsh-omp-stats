@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "title": "OMP Stats",
+    "description": "Usage statistics for local DSH sessions, rendered with the oh-my-pi dashboard layout."
+  },
+  "panel": {
+    "title": "Stats",
+    "description": "Session usage, models, providers, costs, requests and projects."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "dsh-omp-stats",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness plugin: an oh-my-pi style usage statistics dashboard for local DSH sessions.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "src",
+    "LICENSE",
+    "NOTICE.md",
+    "LICENSES",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": []
+    }
+  },
+  "devDependencies": {
+    "lucide-react": "1.24.0"
+  },
+  "scripts": {
+    "build": "bun scripts/build-client.mjs",
+    "build:client": "bun scripts/build-client.mjs",
+    "verify:fold": "node scripts/verify-fold.mjs"
+  }
+}

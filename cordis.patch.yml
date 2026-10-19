@@ -1,0 +1,4 @@
+- insert:
+    - id: omp-stats
+      name: 'dsh-omp-stats'
+      config: {}
