@@ -1,7 +1,7 @@
 {
   "name": "dsh-omp-stats",
   "version": "0.1.0",
-  "description": "DeepSeek Harness plugin: an oh-my-pi style usage statistics dashboard for local DSH sessions.",
+  "description": "DeepSeek Harness plugin: a usage statistics dashboard for local DSH sessions.",
   "type": "module",
   "license": "MIT",
   "exports": {

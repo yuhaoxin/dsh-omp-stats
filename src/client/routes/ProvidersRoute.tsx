@@ -66,7 +66,7 @@ const TOKEN_MIX = [
 	{ key: "output", label: "Output", color: "var(--chart-secondary)" },
 ] as const;
 
-const SNAPSHOT_HINT = "Usage snapshots accumulate whenever usage limits are fetched (TUI footer, /usage, omp usage).";
+const SNAPSHOT_HINT = "DSH does not record subscription usage snapshots; this panel only shows local session usage.";
 
 interface WindowRef {
 	provider: string;

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "OMP 统计",
-    "description": "按 oh-my-pi 面板布局展示本机 DSH 会话的用量统计。"
+    "title": "DSH 统计",
+    "description": "展示本机 DeepSeek Harness 会话的用量统计。"
   },
   "panel": {
     "title": "统计",

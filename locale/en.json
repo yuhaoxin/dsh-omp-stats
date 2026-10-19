@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "OMP Stats",
-    "description": "Usage statistics for local DSH sessions, rendered with the oh-my-pi dashboard layout."
+    "title": "DSH Stats",
+    "description": "Usage statistics for local DeepSeek Harness sessions."
   },
   "panel": {
     "title": "Stats",

@@ -1,5 +1,5 @@
 /**
- * omp 面板的中文翻译。
+ * 统计面板的中文翻译。
  *
  * 上游 UI 的文案是英文硬编码；直接改 7 个 route 会把移植成本和后续同步成本拉高。
  * 这里用一层 presentation adapter：在 shadow root 上把已经渲染出来的英文文本和
@@ -242,7 +242,7 @@ const EXACT = {
 	"Transitions into an exhausted state observed in range": "范围内观察到的耗尽状态转换",
 	"Window resets observed (drops in used fraction)": "观察到的窗口重置（已用比例下降）",
 	"Tokens by local hour of day": "按本地小时统计 Token",
-	"Usage snapshots accumulate whenever usage limits are fetched (TUI footer, /usage, omp usage).": "每次获取用量限额时都会累积快照（TUI 页脚、/usage、omp usage）。",
+	"DSH does not record subscription usage snapshots; this panel only shows local session usage.": "DSH 不记录订阅用量快照；此面板只展示本机会话用量。",
 	"Fraction of all tokens in range": "占范围内全部 Token 的比例",
 	"Peak in range": "范围内峰值",
 	"Distinct models used through this provider": "通过此供应商使用的不同模型数",
@@ -267,12 +267,12 @@ const EXACT = {
 
 const PATTERNS = [
 	// 页面描述（带范围）
-	[/^Everything omp did across your sessions in (.+)\.$/u, m => `omp 在${zhWindow(m[1])}内的全部活动。`],
+	[/^Everything DeepSeek Harness did across your sessions in (.+)\.$/u, m => `DeepSeek Harness 在${zhWindow(m[1])}内的全部活动。`],
 	[/^Which models did the work in (.+), and how fast they answered\.$/u, m => `${zhWindow(m[1])}内哪些模型在干活，响应有多快。`],
 	[/^Usage by session folder in (.+)\.$/u, m => `${zhWindow(m[1])}内按会话目录统计的用量。`],
 	[/^Burn, reliability and subscription headroom per provider over (.+)\.$/u, m => `${zhWindow(m[1])}内各供应商的消耗、可靠性和订阅余量。`],
 	[/^What (.+) of usage would cost at public API rates\. Subscription usage without a public price is counted as unpriced, not free\.$/u, m => `按公开 API 价格估算${zhWindow(m[1])}的用量成本。没有公开价格的订阅用量计入未定价，不按免费处理。`],
-	[/^Every model call omp made in (.+), newest first\. Open a row for its full payload\.$/u, m => `omp 在${zhWindow(m[1])}内的每次模型调用，最新的在前。点击行查看详情。`],
+	[/^Every model call DeepSeek Harness made in (.+), newest first\. Open a row for its full payload\.$/u, m => `DeepSeek Harness 在${zhWindow(m[1])}内的每次模型调用，最新的在前。点击行查看详情。`],
 	[/^Failed model requests in (.+), grouped by error signature\. Open a failure for its full payload\.$/u, m => `${zhWindow(m[1])}内失败的模型请求，按错误签名分组。点击失败查看详情。`],
 	[/^No failures in (.+)$/u, m => `${zhWindow(m[1])}内没有失败`],
 	[/^Showing the latest ([\d,]+) failures in (.+); older ones are not loaded\.$/u, m => `显示${zhWindow(m[2])}内最新 ${m[1]} 次失败；更早的没有加载。`],
