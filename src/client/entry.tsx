@@ -2,9 +2,11 @@ import { useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
 import { CSS } from "./generated-css";
+import { installTranslation, isChinese } from "./i18n";
 import { setPortalRoot } from "./portal";
 
 const PANEL_ID = "omp-stats";
+let localeService = null;
 
 function currentTheme() {
 	// DSH 用 body[data-ds-dark-theme] 标记暗色；旧的 html[data-theme] 只作兜底。
@@ -59,9 +61,17 @@ function Panel() {
 		const media = window.matchMedia("(prefers-color-scheme: dark)");
 		media.addEventListener("change", applyTheme);
 
+		const translation = installTranslation(
+			shadow,
+			() => localeService?.getSnapshot().active ?? navigator.language,
+		);
+		const unsubscribeLocale = localeService?.subscribe(translation.apply);
+
 		const root = createRoot(mount);
 		root.render(<App />);
 		return () => {
+			unsubscribeLocale?.();
+			translation.dispose();
 			root.unmount();
 			observer.disconnect();
 			media.removeEventListener("change", applyTheme);
@@ -94,16 +104,17 @@ function StatsIcon({ size = 20, active = false }: { size?: number; active?: bool
 	);
 }
 
-export const inject = ["slots"];
+export const inject = ["slots", "locale"];
 
 export function apply(ctx) {
+	localeService = ctx.locale;
 	ctx.slots.inject("sidebar.panellist", () =>
 		ctx.slots.register(
 			{
 				name: "sidebar.panellist",
 				id: PANEL_ID,
 				order: 20,
-				label: "Stats",
+				label: () => (isChinese(ctx.locale.getSnapshot().active) ? "统计" : "Stats"),
 			},
 			StatsIcon,
 		),
