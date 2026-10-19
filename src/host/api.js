@@ -21,9 +21,13 @@ export const API_PREFIX = "/api/omp-stats";
 const DEFAULT_LIMIT = 50;
 const MAX_LIMIT = 10_000;
 
-function isLoopback(address) {
-	if (!address) return true;
-	return address === "::1" || address === "127.0.0.1" || address === "::ffff:127.0.0.1";
+function isLoopback(req) {
+	const address = req.socket.remoteAddress;
+	if (address !== "::1" && address !== "127.0.0.1" && address !== "::ffff:127.0.0.1") return false;
+	const rawHost = String(req.headers.host ?? "");
+	if (!rawHost) return false;
+	const host = rawHost.startsWith("[") ? rawHost.slice(0, rawHost.indexOf("]") + 1) : rawHost.split(":")[0];
+	return host === "127.0.0.1" || host === "localhost" || host === "[::1]";
 }
 
 function json(res, data, status = 200) {
@@ -81,7 +85,7 @@ export function createApi(state) {
 
 	const handler = async (req, res) => {
 		try {
-			if (!isLoopback(req.socket.remoteAddress)) {
+			if (!isLoopback(req)) {
 				json(res, { error: "omp-stats only serves loopback clients" }, 403);
 				return;
 			}

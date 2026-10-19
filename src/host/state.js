@@ -96,14 +96,14 @@ export function createStatsState(ctx, config = {}) {
 					sessionId: id,
 					header: log.session,
 					events: log.events,
+					inheritedEventCount: Number(log.inheritedEventCount ?? 0),
 					priceUsage,
 				});
 				cache.set(id, { revision, aggregate });
 				changed = true;
 			} catch (error) {
 				errors.push(`${id}: ${error instanceof Error ? error.message : String(error)}`);
-				// 读取失败的会话保留上一次结果，避免一次瞬时错误清空整个面板。
-				if (!cached) cache.set(id, { revision, aggregate: emptySession(header, priceUsage) });
+				// 读取失败的会话保留上一次结果；没有旧结果时下一轮重试，不缓存空快照。
 			}
 		});
 

@@ -7,6 +7,9 @@ import { setPortalRoot } from "./portal";
 const PANEL_ID = "omp-stats";
 
 function currentTheme() {
+	// DSH 用 body[data-ds-dark-theme] 标记暗色；旧的 html[data-theme] 只作兜底。
+	const darkAttribute = document.body?.getAttribute("data-ds-dark-theme");
+	if (darkAttribute !== null && darkAttribute !== undefined && darkAttribute !== "false") return "dark";
 	const explicit = document.documentElement.dataset.theme;
 	if (explicit === "dark" || explicit === "light") return explicit;
 	const bodyTheme = document.body?.dataset?.theme;
@@ -47,6 +50,12 @@ function Panel() {
 		applyTheme();
 		const observer = new MutationObserver(applyTheme);
 		observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
+		if (document.body) {
+			observer.observe(document.body, {
+				attributes: true,
+				attributeFilter: ["data-ds-dark-theme", "data-theme", "class"],
+			});
+		}
 		const media = window.matchMedia("(prefers-color-scheme: dark)");
 		media.addEventListener("change", applyTheme);
 
