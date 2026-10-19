@@ -46,6 +46,12 @@ SOFTWARE.
 界面图标来自 [`lucide-react`](https://github.com/lucide-icons/lucide)，遵循 ISC 许可；
 构建时会打包进 `client.js`。
 
+## DeepSeek Harness brand mark
+
+`src/client/brand.ts` 与 `icon.svg` 里的鲸鱼标记路径来自
+`@deepseek-ai/dsh-client-ui-primitives` 的 `FishLogo`，属于 DeepSeek Harness，
+遵循 MIT 许可。
+
 ## React
 
 `client.js` 不打包 React，React 由 DeepSeek Harness 的 Web 页面提供。

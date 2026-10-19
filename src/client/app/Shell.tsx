@@ -1,4 +1,5 @@
 import { type ReactNode, useState } from "react";
+import { FISH_LOGO_PATH, FISH_LOGO_VIEWBOX } from "../brand";
 import { rangeMeta, TIME_RANGES } from "../data/range";
 import { useLiveStatus } from "../data/live";
 import type { TimeRange } from "../types";
@@ -24,27 +25,14 @@ export function Shell({ section, onSectionChange, range, onRangeChange, children
 		<div className="omp-dsh-shell">
 			<header className="omp-dsh-header">
 				<div className="omp-dsh-brand">
-					<svg viewBox="0 0 64 64" width="20" height="20" aria-hidden="true">
-						<defs>
-							<linearGradient id="dsh-stats-mark" x1="0" y1="0" x2="1" y2="1">
-								<stop offset="0" stopColor="#ed4abf" />
-								<stop offset=".55" stopColor="#b45cff" />
-								<stop offset="1" stopColor="#5ad8e6" />
-							</linearGradient>
-						</defs>
-						<g fill="url(#dsh-stats-mark)">
-							<rect x="12" y="34" width="8" height="18" rx="2" />
-							<rect x="26" y="24" width="8" height="28" rx="2" />
-							<rect x="40" y="14" width="8" height="38" rx="2" />
-						</g>
-						<path
-							d="M12 22 L28 14 L44 18 L54 8"
-							fill="none"
-							stroke="#5ad8e6"
-							strokeWidth="3"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						/>
+					<svg
+						viewBox={FISH_LOGO_VIEWBOX}
+						width="22"
+						height="16.2"
+						aria-hidden="true"
+						style={{ display: "block", flex: "0 0 auto" }}
+					>
+						<path d={FISH_LOGO_PATH} fill="currentColor" />
 					</svg>
 					<span className="omp-dsh-brand-name">dsh</span>
 					<span className="omp-dsh-brand-slash">/</span>

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
+import { FISH_LOGO_PATH, FISH_LOGO_VIEWBOX } from "./brand";
 import { CSS } from "./generated-css";
 import { installTranslation, isChinese } from "./i18n";
 import { setPortalRoot } from "./portal";
@@ -86,20 +87,15 @@ function Panel() {
 function StatsIcon({ size = 20, active = false }: { size?: number; active?: boolean }) {
 	return (
 		<svg
-			viewBox="0 0 24 24"
+			viewBox={FISH_LOGO_VIEWBOX}
 			width={size}
 			height={size}
 			aria-hidden="true"
 			data-active={active}
+			preserveAspectRatio="xMidYMid meet"
 			style={{ display: "block" }}
 		>
-			<path
-				d="M4 19V9M10 19V4M16 19v-7M22 19H2"
-				fill="none"
-				stroke="currentColor"
-				strokeWidth="1.7"
-				strokeLinecap="round"
-			/>
+			<path d={FISH_LOGO_PATH} fill="currentColor" />
 		</svg>
 	);
 }
